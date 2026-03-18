@@ -36,17 +36,17 @@ class _CalcScreenState extends State<CalcScreen> {
 
   final List<Map<String, dynamic>> fundOptions = [
     {
-      "name": "安聯收益成長-AM穩定月配息股美元", 
+      "name": "安聯收益成長-AM穩定月配息股美元(DSP5)", 
       "url": r"https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=tlz64", 
       "defaultDiv": "0.055"
     },
     {
-      "name": "景順環球高評級企業債券E-穩定月配息股美元", 
+      "name": "景順環球高評級企業債券E-穩定月配息股美元(IGB5)", 
       "url": r"https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=ctzP0", 
       "defaultDiv": "0.051"
     },
     {
-      "name": "摩根投資基金 - 多重收益基金-JPM多重收益A股(穩定月配) JFP11", 
+      "name": "摩根投資基金-JPM多重收益A股穩定月配美元 (JFP11)", 
       "url": r"https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=JFZN3", 
       "defaultDiv": "0.045" 
     },
@@ -188,4 +188,56 @@ class _CalcScreenState extends State<CalcScreen> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(minimumSize: Size(double.infinity, 50), backgroundColor: Colors.
+              style: ElevatedButton.styleFrom(minimumSize: Size(double.infinity, 50), backgroundColor: Colors.blueGrey),
+              onPressed: runCalculation,
+              child: Text("執行試算", style: TextStyle(color: Colors.white, fontSize: 18)),
+            ),
+            SizedBox(height: 20),
+            Container(
+              width: double.infinity, 
+              padding: EdgeInsets.all(15), 
+              decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(10)), 
+              child: Text(result)
+            ),
+            SizedBox(height: 30),
+            const Divider(),
+            const Text("【手續費率級距參考表】", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueGrey)),
+            SizedBox(height: 15), 
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildFeeTable("台幣", [
+                  "200萬以下：5%",
+                  "200萬~500萬：4%",
+                  "500萬~1000萬：3%",
+                  "1000萬以上：2%",
+                ]),
+                _buildFeeTable("美元", [
+                  "66,600以下：5%",
+                  "66,600~166,600：4%",
+                  "166,600~333,300：3%",
+                  "333,300以上：2%",
+                ]),
+              ],
+            ),
+            SizedBox(height: 30),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFeeTable(String title, List<String> rows) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, decoration: TextDecoration.underline)),
+        ...rows.map((row) => Padding(
+          padding: const EdgeInsets.only(top: 6.0),
+          child: Text(row, style: const TextStyle(fontSize: 14)),
+        )).toList(),
+      ],
+    );
+  }
+}
