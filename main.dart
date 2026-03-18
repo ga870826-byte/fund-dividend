@@ -87,4 +87,52 @@ class _CalcScreenState extends State<CalcScreen> {
     _saveData();
     double premium = double.tryParse(premiumController.text) ?? 0;
     double inputFeeRate = (double.tryParse(feeRateController.text) ?? 0) / 100; 
-    double rate = double.tryParse(exchange
+    double rate = double.tryParse(exchangeRateController.text) ?? 1.0;
+    double nav = double.tryParse(navController.text) ?? 0;
+    double divPerUnit = double.tryParse(divController.text) ?? 0;
+
+    if (premium <= 0 || nav <= 0 || rate <= 0) {
+      setState(() => result = "請完整輸入金額、手續費、匯率及淨值");
+      return;
+    }
+
+    double feeAmount = premium * inputFeeRate;
+    double netPremium = premium - feeAmount;
+    
+    double units = (selectedCurrency == "TWD") ? (netPremium / rate) / nav : netPremium / nav;
+    double monthlyUSD = units * divPerUnit;
+    double monthlyTWD = monthlyUSD * rate;
+    double yearlyUSD = monthlyUSD * 12;
+    double yearlyTWD = yearlyUSD * rate;
+
+    setState(() {
+      if (selectedCurrency == "TWD") {
+        result = "【台幣版本結論】\n手續費率：${(inputFeeRate * 100).toStringAsFixed(1)}%\n淨投入金額：${netPremium.toStringAsFixed(0)} TWD\n購入單位數：${units.toStringAsFixed(4)}\n-----------------------------------\n預計每月領取：${monthlyTWD.toStringAsFixed(0)} TWD\n預計每年合計：${yearlyTWD.toStringAsFixed(0)} TWD";
+      } else {
+        result = "【美元版本結論】\n手續費率：${(inputFeeRate * 100).toStringAsFixed(1)}%\n淨投入金額：${netPremium.toStringAsFixed(2)} USD\n購入單位數：${units.toStringAsFixed(4)}\n-----------------------------------\n預計每月領取：${monthlyUSD.toStringAsFixed(2)} USD\n(約合台幣：${monthlyTWD.toStringAsFixed(0)} TWD)\n\n預計每年合計：${yearlyUSD.toStringAsFixed(2)} USD\n(約合台幣：${yearlyTWD.toStringAsFixed(0)} TWD)";
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('基金配息試算'), centerTitle: true),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            SegmentedButton<String>(
+              showSelectedIcon: false,
+              style: SegmentedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                visualDensity: VisualDensity.compact,
+              ),
+              segments: [
+                ButtonSegment(value: 'TWD', label: Text('台幣', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+                ButtonSegment(value: 'USD', label: Text('美元', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
+              ],
+              selected: {selectedCurrency},
+              onSelectionChanged: (val) => setState(() => selectedCurrency = val.first),
+            ),
+            SizedBox(height
