@@ -135,4 +135,109 @@ class _CalcScreenState extends State<CalcScreen> {
               selected: {selectedCurrency},
               onSelectionChanged: (val) => setState(() => selectedCurrency = val.first),
             ),
-            SizedBox(height
+            SizedBox(height: 20),
+            DropdownButtonFormField<Map<String, dynamic>>(
+              decoration: InputDecoration(labelText: "選擇標的", border: OutlineInputBorder()),
+              value: selectedFund,
+              items: fundOptions.map((f) => DropdownMenuItem(value: f, child: SizedBox(width: MediaQuery.of(context).size.width * 0.7, child: Text(f['name'], style: TextStyle(fontSize: 11), overflow: TextOverflow.ellipsis)))).toList(),
+              onChanged: (val) {
+                setState(() {
+                  selectedFund = val;
+                  divController.text = val!['defaultDiv'];
+                  _launchUrl(val['url']!);
+                });
+              },
+            ),
+            SizedBox(height: 15),
+            TextField(
+              controller: premiumController,
+              decoration: InputDecoration(labelText: "投入保費 ($selectedCurrency)", border: OutlineInputBorder()),
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              enableInteractiveSelection: true,
+            ),
+            SizedBox(height: 15),
+            TextField(
+              controller: feeRateController,
+              decoration: InputDecoration(labelText: "手續費率 (%)", hintText: "例如輸入 3 代表 3%", border: OutlineInputBorder()),
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              enableInteractiveSelection: true,
+            ),
+            SizedBox(height: 15),
+            TextField(
+              controller: exchangeRateController,
+              decoration: InputDecoration(labelText: "參考匯率 (USD/TWD)", border: OutlineInputBorder()),
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              enableInteractiveSelection: true,
+              onChanged: (v) => _saveData(),
+            ),
+            SizedBox(height: 15),
+            TextField(
+              controller: navController,
+              decoration: InputDecoration(labelText: "當前淨值 (USD)", border: OutlineInputBorder()),
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              enableInteractiveSelection: true,
+              onChanged: (v) => _saveData(),
+            ),
+            SizedBox(height: 15),
+            TextField(
+              controller: divController,
+              decoration: InputDecoration(labelText: "單位配息 (USD)", border: OutlineInputBorder()),
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              enableInteractiveSelection: true,
+              onChanged: (v) => _saveData(),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(minimumSize: Size(double.infinity, 50), backgroundColor: Colors.blueGrey),
+              onPressed: runCalculation,
+              child: Text("執行試算", style: TextStyle(color: Colors.white, fontSize: 18)),
+            ),
+            SizedBox(height: 20),
+            Container(
+              width: double.infinity, 
+              padding: EdgeInsets.all(15), 
+              decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(10)), 
+              child: Text(result)
+            ),
+            SizedBox(height: 30),
+            const Divider(),
+            const Text("【手續費率級距參考表】", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey)),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildFeeTable("台幣", [
+                  "200萬以下：5%",
+                  "200萬~500萬：4%",
+                  "500萬~1000萬：3%",
+                  "1000萬以上：2%",
+                ]),
+                _buildFeeTable("美元", [
+                  "66,600以下：5%",
+                  "66,600~166,600：4%",
+                  "166,600~333,300：3%",
+                  "333,300以上：2%",
+                ]),
+              ],
+            ),
+            SizedBox(height: 30),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFeeTable(String title, List<String> rows) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: const TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline)),
+        ...rows.map((row) => Padding(
+          padding: const EdgeInsets.only(top: 4.0),
+          child: Text(row, style: const TextStyle(fontSize: 11)),
+        )).toList(),
+      ],
+    );
+  }
+}
