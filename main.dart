@@ -26,23 +26,29 @@ class CalcScreen extends StatefulWidget {
 
 class _CalcScreenState extends State<CalcScreen> {
   final TextEditingController premiumController = TextEditingController(); 
+  final TextEditingController feeRateController = TextEditingController(); // 手續費專用控制器
   final TextEditingController exchangeRateController = TextEditingController(text: "31.5"); 
   final TextEditingController navController = TextEditingController(); 
   final TextEditingController divController = TextEditingController(); 
   
-  String selectedCurrency = "USD"; 
+  String selectedCurrency = "TWD"; // 預設選擇台幣
   String result = "請輸入數據並執行試算";
 
   final List<Map<String, dynamic>> fundOptions = [
     {
-      "name": "安聯收益成長-AM穩定月配息股美元", 
+      "name": "安聯收益成長-AM穩定月配息股美元(DSP5)", 
       "url": r"https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=tlz64", 
       "defaultDiv": "0.055"
     },
     {
-      "name": "景順環球高評級企業債券E-穩定月配息股美元", 
+      "name": "景順環球高評級企業債券E-穩定月配息股美元(IGB5)", 
       "url": r"https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=ctzP0", 
       "defaultDiv": "0.051"
+    },
+    {
+      "name": "摩根投資基金-JPM多重收益A股穩定月配美元(JFP11)", 
+      "url": r"https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=JFZN3", 
+      "defaultDiv": "0.045" // 預設配息可依實際狀況更改
     },
   ];
 
@@ -80,30 +86,21 @@ class _CalcScreenState extends State<CalcScreen> {
   void runCalculation() {
     _saveData();
     double premium = double.tryParse(premiumController.text) ?? 0;
+    // 將輸入的手續費 % 數轉為小數 (例如輸入 3 變成 0.03)
+    double inputFeeRate = (double.tryParse(feeRateController.text) ?? 0) / 100; 
     double rate = double.tryParse(exchangeRateController.text) ?? 1.0;
     double nav = double.tryParse(navController.text) ?? 0;
     double divPerUnit = double.tryParse(divController.text) ?? 0;
 
     if (premium <= 0 || nav <= 0 || rate <= 0) {
-      setState(() => result = "請完整輸入金額、匯率及淨值");
+      setState(() => result = "請完整輸入金額、手續費、匯率及淨值");
       return;
     }
 
-    double feeRate;
-    if (selectedCurrency == "TWD") {
-      if (premium >= 10000000) feeRate = 0.02;
-      else if (premium >= 5000000) feeRate = 0.03;
-      else if (premium >= 2000000) feeRate = 0.04;
-      else feeRate = 0.05;
-    } else {
-      if (premium >= 333300) feeRate = 0.02;
-      else if (premium >= 166600) feeRate = 0.03;
-      else if (premium >= 66600) feeRate = 0.04;
-      else feeRate = 0.05;
-    }
-
-    double feeAmount = premium * feeRate;
+    // 依照輸入的手續費率進行扣除
+    double feeAmount = premium * inputFeeRate;
     double netPremium = premium - feeAmount;
+    
     double units = (selectedCurrency == "TWD") ? (netPremium / rate) / nav : netPremium / nav;
     double monthlyUSD = units * divPerUnit;
     double monthlyTWD = monthlyUSD * rate;
@@ -112,9 +109,9 @@ class _CalcScreenState extends State<CalcScreen> {
 
     setState(() {
       if (selectedCurrency == "TWD") {
-        result = "【台幣版本結論】\n手續費率：${(feeRate * 100).toInt()}%\n淨投入金額：${netPremium.toStringAsFixed(0)} TWD\n購入單位數：${units.toStringAsFixed(4)}\n-----------------------------------\n預計每月領取：${monthlyTWD.toStringAsFixed(0)} TWD\n預計每年合計：${yearlyTWD.toStringAsFixed(0)} TWD";
+        result = "【台幣版本結論】\n手續費率：${(inputFeeRate * 100).toStringAsFixed(1)}%\n淨投入金額：${netPremium.toStringAsFixed(0)} TWD\n購入單位數：${units.toStringAsFixed(4)}\n-----------------------------------\n預計每月領取：${monthlyTWD.toStringAsFixed(0)} TWD\n預計每年合計：${yearlyTWD.toStringAsFixed(0)} TWD";
       } else {
-        result = "【美元版本結論】\n手續費率：${(feeRate * 100).toInt()}%\n淨投入金額：${netPremium.toStringAsFixed(2)} USD\n購入單位數：${units.toStringAsFixed(4)}\n-----------------------------------\n預計每月領取：${monthlyUSD.toStringAsFixed(2)} USD\n(約合台幣：${monthlyTWD.toStringAsFixed(0)} TWD)\n\n預計每年合計：${yearlyUSD.toStringAsFixed(2)} USD\n(約合台幣：${yearlyTWD.toStringAsFixed(0)} TWD)";
+        result = "【美元版本結論】\n手續費率：${(inputFeeRate * 100).toStringAsFixed(1)}%\n淨投入金額：${netPremium.toStringAsFixed(2)} USD\n購入單位數：${units.toStringAsFixed(4)}\n-----------------------------------\n預計每月領取：${monthlyUSD.toStringAsFixed(2)} USD\n(約合台幣：${monthlyTWD.toStringAsFixed(0)} TWD)\n\n預計每年合計：${yearlyUSD.toStringAsFixed(2)} USD\n(約合台幣：${yearlyTWD.toStringAsFixed(0)} TWD)";
       }
     });
   }
@@ -144,7 +141,8 @@ class _CalcScreenState extends State<CalcScreen> {
             DropdownButtonFormField<Map<String, dynamic>>(
               decoration: InputDecoration(labelText: "1. 選擇標的", border: OutlineInputBorder()),
               value: selectedFund,
-              items: fundOptions.map((f) => DropdownMenuItem(value: f, child: Text(f['name'], style: TextStyle(fontSize: 12)))).toList(),
+              // 為了確保長名稱能顯示，將字體稍微縮小，且允許換行顯示（如果有需要）
+              items: fundOptions.map((f) => DropdownMenuItem(value: f, child: SizedBox(width: MediaQuery.of(context).size.width * 0.7, child: Text(f['name'], style: TextStyle(fontSize: 11), overflow: TextOverflow.ellipsis)))).toList(),
               onChanged: (val) {
                 setState(() {
                   selectedFund = val;
@@ -156,14 +154,21 @@ class _CalcScreenState extends State<CalcScreen> {
             SizedBox(height: 15),
             TextField(
               controller: premiumController,
-              decoration: InputDecoration(labelText: "投入保費 ($selectedCurrency)", border: OutlineInputBorder()),
+              decoration: InputDecoration(labelText: "2. 投入保費 ($selectedCurrency)", border: OutlineInputBorder()),
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              enableInteractiveSelection: true,
+            ),
+            SizedBox(height: 15),
+            TextField(
+              controller: feeRateController,
+              decoration: InputDecoration(labelText: "3. 手續費率 (%)", hintText: "例如輸入 3 代表 3%", border: OutlineInputBorder()),
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
               enableInteractiveSelection: true,
             ),
             SizedBox(height: 15),
             TextField(
               controller: exchangeRateController,
-              decoration: InputDecoration(labelText: "參考匯率 (USD/TWD)", border: OutlineInputBorder()),
+              decoration: InputDecoration(labelText: "4. 參考匯率 (USD/TWD)", border: OutlineInputBorder()),
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
               enableInteractiveSelection: true,
               onChanged: (v) => _saveData(),
@@ -171,7 +176,7 @@ class _CalcScreenState extends State<CalcScreen> {
             SizedBox(height: 15),
             TextField(
               controller: navController,
-              decoration: InputDecoration(labelText: "當前淨值 (USD)", border: OutlineInputBorder()),
+              decoration: InputDecoration(labelText: "5. 當前淨值 (USD)", border: OutlineInputBorder()),
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
               enableInteractiveSelection: true,
               onChanged: (v) => _saveData(),
@@ -179,7 +184,7 @@ class _CalcScreenState extends State<CalcScreen> {
             SizedBox(height: 15),
             TextField(
               controller: divController,
-              decoration: InputDecoration(labelText: "單位配息 (USD)", border: OutlineInputBorder()),
+              decoration: InputDecoration(labelText: "6. 單位配息 (USD)", border: OutlineInputBorder()),
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
               enableInteractiveSelection: true,
               onChanged: (v) => _saveData(),
@@ -197,9 +202,45 @@ class _CalcScreenState extends State<CalcScreen> {
               decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(10)), 
               child: Text(result)
             ),
+            SizedBox(height: 30),
+            const Divider(),
+            const Text("【手續費率級距參考表】", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey)),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildFeeTable("台幣", [
+                  "200萬以下：5%",
+                  "200萬~500萬：4%",
+                  "500萬~1000萬：3%",
+                  "1000萬以上：2%",
+                ]),
+                _buildFeeTable("美元", [
+                  "66,600以下：5%",
+                  "66,600~166,600：4%",
+                  "166,600~333,300：3%",
+                  "333,300以上：2%",
+                ]),
+              ],
+            ),
+            SizedBox(height: 30),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildFeeTable(String title, List<String> rows) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: const TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline)),
+        ...rows.map((row) => Padding(
+          padding: const EdgeInsets.only(top: 4.0),
+          child: Text(row, style: const TextStyle(fontSize: 11)),
+        )).toList(),
+      ],
     );
   }
 }
