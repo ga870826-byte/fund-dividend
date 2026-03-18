@@ -12,7 +12,7 @@ jobs:
           channel: 'stable'
       - run: flutter create . --platforms web  # 這行會自動幫你生出 index.html
       - run: flutter pub get
-      - run: flutter build web --release --base-href /calc/ --target main.dart
+      - run: flutter build web --release --base-href /fund-dividend/ --target main.dart
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
