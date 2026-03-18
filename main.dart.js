@@ -79253,7 +79253,7 @@ O(a){var s=null
 return new A.xg(new A.v5(s),"\u57fa\u91d1\u914d\u606f\u8a66\u7b97",A.rT(s,s,B.jX,!0),!1,s)}}
 A.v5.prototype={
 al(){var s=$.af(),r=t.N,q=t.z
-return new A.Ax(new A.lN(B.eQ,s),new A.lN(B.eQ,s),new A.lN(new A.cg("31.5",B.hG,B.b1),s),new A.lN(B.eQ,s),new A.lN(B.eQ,s),A.d([A.ag(["name","\u5b89\u806f\u6536\u76ca\u6210\u9577-AM\u7a69\u5b9a\u6708\u914d\u606f\u80a1\u7f8e\u5143(DSP5)","url","https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=tlz64","defaultDiv","0.055"],r,q),A.ag(["name","\u666f\u9806\u74b0\u7403\u9ad8\u8a55\u7d1a\u4f01\u696d\u50b5\u5238E-\u7a69\u5b9a\u6708\u914d\u606f\u80a1\u7f8e\u5143(IGB5)","url","https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=ctzP0","defaultDiv","0.051"],r,q),A.ag(["name","\u6469\u6839\u6295\u8cc7\u57fa\u91d1-JPM\u591a\u91cd\u6536\u76caA\u80a1\u7a69\u5b9a\u6708\u914d\u7f8e\u5143(JFP11)","url","https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=JFZN3","defaultDiv","0.045"],r,q)],t.H7))}}
+return new A.Ax(new A.lN(B.eQ,s),new A.lN(B.eQ,s),new A.lN(new A.cg("31.5",B.hG,B.b1),s),new A.lN(B.eQ,s),new A.lN(B.eQ,s),A.d([A.ag(["name","\u5b89\u806f\u6536\u76ca\u6210\u9577-AM\u7a69\u5b9a\u6708\u914d\u606f\u80a1\u7f8e\u5143","url","https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=tlz64","defaultDiv","0.055"],r,q),A.ag(["name","\u666f\u9806\u74b0\u7403\u9ad8\u8a55\u7d1a\u4f01\u696d\u50b5\u5238E-\u7a69\u5b9a\u6708\u914d\u606f\u80a1\u7f8e\u5143","url","https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=ctzP0","defaultDiv","0.051"],r,q),A.ag(["name","\u6469\u6839\u6295\u8cc7\u57fa\u91d1 - \u591a\u91cd\u6536\u76ca\u57fa\u91d1-JPM\u591a\u91cd\u6536\u76caA\u80a1(\u7a69\u5b9a\u6708\u914d) JFP11","url","https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=JFZN3","defaultDiv","0.045"],r,q)],t.H7))}}
 A.Ax.prototype={
 aA(){this.aP()
 this.uT()},
@@ -79308,22 +79308,22 @@ O(a6){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1=this,a2=null,a3=A.ea("\u57
 a5=A.d([new A.jc("TWD",A.ea("\u53f0\u5e63",a2,a2,a2,A.eI(a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,16,a2,a2,B.bR,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2),a2,a2),a5),new A.jc("USD",A.ea("\u7f8e\u5143",a2,a2,a2,A.eI(a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,16,a2,a2,B.bR,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2),a2,a2),a5)],t.CK)
 s=A.bI([a1.x],t.N)
 r=A.dg(a2,20,a2)
-q=A.qr(a2,new A.e7(4,B.bu,B.cn),a2,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,"1. \u9078\u64c7\u6a19\u7684",!0,!0,!1,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2)
+q=A.qr(a2,new A.e7(4,B.bu,B.cn),a2,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,"\u9078\u64c7\u6a19\u7684",!0,!0,!1,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2)
 p=a1.Q
 o=a1.z
 n=A.a_(o).i("a6<1,ib<aN<C,@>>>")
 o=A.a1(new A.a6(o,new A.acU(a6),n),n.i("an.E"))
 q=A.azE(q,o,new A.acV(a1),p,t.a)
 p=A.dg(a2,15,a2)
-o=A.L4(a1.d,A.qr(a2,new A.e7(4,B.bu,B.cn),a2,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,"2. \u6295\u5165\u4fdd\u8cbb ("+a1.x+")",!0,!0,!1,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2),!0,B.eR,a2)
+o=A.L4(a1.d,A.qr(a2,new A.e7(4,B.bu,B.cn),a2,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,"\u6295\u5165\u4fdd\u8cbb ("+a1.x+")",!0,!0,!1,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2),!0,B.eR,a2)
 n=A.dg(a2,15,a2)
-m=A.L4(a1.e,A.qr(a2,new A.e7(4,B.bu,B.cn),a2,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,"\u4f8b\u5982\u8f38\u5165 3 \u4ee3\u8868 3%",a2,a2,a2,a2,a2,a2,a2,a2,"3. \u624b\u7e8c\u8cbb\u7387 (%)",!0,!0,!1,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2),!0,B.eR,a2)
+m=A.L4(a1.e,A.qr(a2,new A.e7(4,B.bu,B.cn),a2,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,"\u4f8b\u5982\u8f38\u5165 3 \u4ee3\u8868 3%",a2,a2,a2,a2,a2,a2,a2,a2,"\u624b\u7e8c\u8cbb\u7387 (%)",!0,!0,!1,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2),!0,B.eR,a2)
 l=A.dg(a2,15,a2)
-k=A.L4(a1.f,A.qr(a2,new A.e7(4,B.bu,B.cn),a2,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,"4. \u53c3\u8003\u532f\u7387 (USD/TWD)",!0,!0,!1,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2),!0,B.eR,new A.acW(a1))
+k=A.L4(a1.f,A.qr(a2,new A.e7(4,B.bu,B.cn),a2,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,"\u53c3\u8003\u532f\u7387 (USD/TWD)",!0,!0,!1,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2),!0,B.eR,new A.acW(a1))
 j=A.dg(a2,15,a2)
-i=A.L4(a1.r,A.qr(a2,new A.e7(4,B.bu,B.cn),a2,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,"5. \u7576\u524d\u6de8\u503c (USD)",!0,!0,!1,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2),!0,B.eR,new A.acX(a1))
+i=A.L4(a1.r,A.qr(a2,new A.e7(4,B.bu,B.cn),a2,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,"\u7576\u524d\u6de8\u503c (USD)",!0,!0,!1,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2),!0,B.eR,new A.acX(a1))
 h=A.dg(a2,15,a2)
-g=A.L4(a1.w,A.qr(a2,new A.e7(4,B.bu,B.cn),a2,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,"6. \u55ae\u4f4d\u914d\u606f (USD)",!0,!0,!1,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2),!0,B.eR,new A.acY(a1))
+g=A.L4(a1.w,A.qr(a2,new A.e7(4,B.bu,B.cn),a2,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,"\u55ae\u4f4d\u914d\u606f (USD)",!0,!0,!1,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2,a2),!0,B.eR,new A.acY(a1))
 f=A.dg(a2,20,a2)
 e=A.azT(a2,a2,B.jX,a2,a2,a2,a2,a2,a2,a2,a2,new A.E(1/0,50),a2,a2,a2,a2,a2,a2,a2,a2)
 d=A.ea("\u57f7\u884c\u8a66\u7b97",a2,a2,a2,A.eI(a2,a2,B.k,a2,a2,a2,a2,a2,a2,a2,a2,18,a2,a2,a2,a2,a2,!0,a2,a2,a2,a2,a2,a2,a2,a2),a2,a2)
