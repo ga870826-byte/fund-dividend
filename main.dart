@@ -50,6 +50,11 @@ class _CalcScreenState extends State<CalcScreen> {
       "url": r"https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=JFZN3", 
       "defaultDiv": "0.045" 
     },
+    {
+      "name": "富蘭克林坦伯頓全球投資系列-穩定月收益美元(FRP4)", 
+      "url": r"https://www.moneydj.com/funddj/ya/yp010001.djhtm?a=flz92", 
+      "defaultDiv": "0.052" 
+    },
   ];
 
   Map<String, dynamic>? selectedFund;
