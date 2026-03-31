@@ -101,6 +101,9 @@ class _CalcScreenState extends State<CalcScreen> {
       return;
     }
 
+    // 計算當前年化報酬率：(單位配息 / 當前淨值) * 12
+    double annualizedReturn = (divPerUnit / nav) * 12;
+
     double feeAmount = premium * inputFeeRate;
     double netPremium = premium - feeAmount;
     
@@ -112,9 +115,9 @@ class _CalcScreenState extends State<CalcScreen> {
 
     setState(() {
       if (selectedCurrency == "TWD") {
-        result = "【台幣版本結論】\n手續費率：${(inputFeeRate * 100).toStringAsFixed(1)}%\n淨投入金額：${netPremium.toStringAsFixed(0)} TWD\n購入單位數：${units.toStringAsFixed(4)}\n-----------------------------------\n預計每月領取：${monthlyTWD.toStringAsFixed(0)} TWD\n預計每年合計：${yearlyTWD.toStringAsFixed(0)} TWD";
+        result = "【台幣版本結論】\n當前年化報酬率：${(annualizedReturn * 100).toStringAsFixed(2)}%\n手續費率：${(inputFeeRate * 100).toStringAsFixed(1)}%\n淨投入金額：${netPremium.toStringAsFixed(0)} TWD\n購入單位數：${units.toStringAsFixed(4)}\n-----------------------------------\n預計每月領取：${monthlyTWD.toStringAsFixed(0)} TWD\n預計每年合計：${yearlyTWD.toStringAsFixed(0)} TWD";
       } else {
-        result = "【美元版本結論】\n手續費率：${(inputFeeRate * 100).toStringAsFixed(1)}%\n淨投入金額：${netPremium.toStringAsFixed(2)} USD\n購入單位數：${units.toStringAsFixed(4)}\n-----------------------------------\n預計每月領取：${monthlyUSD.toStringAsFixed(2)} USD\n(約合台幣：${monthlyTWD.toStringAsFixed(0)} TWD)\n\n預計每年合計：${yearlyUSD.toStringAsFixed(2)} USD\n(約合台幣：${yearlyTWD.toStringAsFixed(0)} TWD)";
+        result = "【美元版本結論】\n當前年化報酬率：${(annualizedReturn * 100).toStringAsFixed(2)}%\n手續費率：${(inputFeeRate * 100).toStringAsFixed(1)}%\n淨投入金額：${netPremium.toStringAsFixed(2)} USD\n購入單位數：${units.toStringAsFixed(4)}\n-----------------------------------\n預計每月領取：${monthlyUSD.toStringAsFixed(2)} USD\n(約合台幣：${monthlyTWD.toStringAsFixed(0)} TWD)\n\n預計每年合計：${yearlyUSD.toStringAsFixed(2)} USD\n(約合台幣：${yearlyTWD.toStringAsFixed(0)} TWD)";
       }
     });
   }
@@ -202,7 +205,7 @@ class _CalcScreenState extends State<CalcScreen> {
               width: double.infinity, 
               padding: EdgeInsets.all(15), 
               decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(10)), 
-              child: Text(result)
+              child: Text(result, style: TextStyle(fontSize: 15)) // 稍微將結果文字放大一點點讓重點更突出
             ),
             SizedBox(height: 30),
             const Divider(),
